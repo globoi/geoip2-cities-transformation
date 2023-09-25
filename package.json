@@ -1,0 +1,6 @@
+{
+  "name": "geoip2-cities-transformation",
+  "dependencies": {
+    "@dataform/core": "2.4.2"
+  }
+}
