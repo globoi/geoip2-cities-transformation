@@ -1,3 +1,0 @@
-dataform:
-  repository:
-    ssh_key: ~/.ssh/geoipkey
