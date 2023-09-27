@@ -1,0 +1,68 @@
+{
+    "environments": [
+      {
+        "name": "prd",
+        "configOverride": {
+          "defaultSchema": "dataform",
+          "defaultDatabase": "gglobo-geoip-hdg-prd",
+          "vars": {
+            "env": "prd",
+            "refinedLayerDatabase": "gglobo-geoip-hdg-prd"
+          }
+        },
+        "gitRef": "master"
+      },
+      {
+        "name": "stg",
+        "configOverride": {
+          "defaultSchema": "dataform",
+          "defaultDatabase": "gglobo-geoip-hdg-dev",
+          "vars": {
+            "env": "stg",
+            "refinedLayerDatabase": "gglobo-geoip-hdg-dev"
+          }
+        },
+        "schedules": [
+          {
+            "name": "mainPipelineStg",
+            "cron": "0 7 * * *",
+            "tags": [
+              "staging",
+              "refined"
+            ],
+            "disabled": true,
+            "notify": [
+              {
+                "channel": "recommended-items-pipeline",
+                "statuses": [
+                  "FAILURE",
+                  "SUCCESS"
+                ]
+              }
+            ]
+          }
+        ],
+        "gitRef": "dataform_stg"
+      },
+      {
+        "name": "dev",
+        "configOverride": {
+          "defaultSchema": "dataform",
+          "defaultDatabase": "gglobo-geoip-hdg-dev",
+          "vars": {
+            "env": "dev",
+            "refinedLayerDatabase": "gglobo-geoip-hdg-dev"
+          }
+        },
+        "gitRef": "dataform_dev"
+      }
+    ],
+    "notificationChannels": [
+      {
+        "name": "recommended-items-pipeline",
+        "slack": {
+          "webhookUrl": "https://hooks.slack.com/services/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"
+        }
+      }
+    ]
+  }

@@ -1,8 +1,7 @@
 {
-  "defaultSchema": "dataform",
-  "assertionSchema": "dataform_assertions",
   "warehouse": "bigquery",
+  "defaultSchema": "staging",
+  "assertionSchema": "dataform_assertions",
   "defaultDatabase": "gglobo-geoip-hdg-dev",
   "defaultLocation": "US"
 }
-    
