@@ -1,0 +1,49 @@
+config {
+    name: "city_blocks_ipv4",
+    type: "table",
+    schema: "legacy",
+    columns: [
+        network: "Esta é a rede IPv4 no formato CIDR.",
+        geoname_id: "Um identificador exclusivo para a localização da rede conforme especificado por GeoNames.",
+        registered_country_geoname_id: "O país registrado é o país no qual o ISP registrou a rede. Esta coluna contém um identificador exclusivo para o país registrado da rede, conforme especificado por GeoNames.",
+        represented_country_geoname_id: "É o país representado pelos usuários do endereço IP. Por exemplo, o país representado por uma base militar no exterior. Esta coluna contém um identificador exclusivo para o país registrado da rede, conforme especificado por GeoNames.",
+        is_anonymous_proxy: "Descontinuado. Consulte o banco de dados de Anonimous IP GeoIP2 da Maxmind para determinar se o endereço IP é usado por um serviço de anonimato.",
+        is_satellite_provider: "Descontinuado.",
+        postal_code: "Um código postal próximo à localização do usuário.",
+        latitude: "A latitude WGS84 aproximada do local associado à rede.",
+        longitude: "A longitude WGS84 aproximada do local associado à rede.",
+        accuracy_radius: "O raio em quilômetros ao redor do local especificado onde o endereço IP provavelmente estará.",
+    ]
+}
+
+WITH ip_data AS (
+  SELECT
+    network,
+    CAST(SPLIT(network, '/')[OFFSET(0)] AS STRING) AS ip_part,
+    CAST(SPLIT(network, '/')[OFFSET(1)] AS INT64) AS prefix_length
+  FROM
+    ${ref('city_blocks_ipv4')}
+), first_last_ip (
+    SELECT
+    network,
+    NET.IP_TO_STRING(NET.IP_FROM_STRING(ip_part)) AS network_start_ip,
+    NET.IP_TO_STRING( NET.IP_FROM_STRING(ip_part) | NET.IPV4_FROM_INT64( CAST(FLOOR(POW(2, 32 - prefix_length)) AS INT64) - 1 ) ) AS network_last_ip
+    FROM
+    ip_data
+)
+select
+    a.network,
+    a.geoname_id,
+    a.registered_country_geoname_id,
+    a.represented_country_geoname_id,
+    a.is_anonymous_proxy,
+    a.is_satellite_provider,
+    a.postal_code,
+    a.latitude,
+    a.longitude,
+    a.accuracy_radius,
+    b.network_start_ip,
+    b.network_last_ip
+
+from ${ref('city_blocks_ipv4')} as a left join first_last_ip
+on a.network = b.network
