@@ -47,5 +47,5 @@ select
     b.network_start_ip,
     b.network_last_ip
 
-from ${ref('city_blocks_ipv4')} as a left join first_last_ip
+from ${ref('city_blocks_ipv4')} as a left join first_last_ip as b
 on a.network = b.network
