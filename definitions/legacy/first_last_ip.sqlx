@@ -1,8 +1,8 @@
 config {
-    name: "city_blocks_ipv4",
+    name: "city_blocks_ipv4_legacy",
     type: "table",
     schema: "legacy",
-    columns: [
+    columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
         geoname_id: "Um identificador exclusivo para a localização da rede conforme especificado por GeoNames.",
         registered_country_geoname_id: "O país registrado é o país no qual o ISP registrou a rede. Esta coluna contém um identificador exclusivo para o país registrado da rede, conforme especificado por GeoNames.",
@@ -13,7 +13,9 @@ config {
         latitude: "A latitude WGS84 aproximada do local associado à rede.",
         longitude: "A longitude WGS84 aproximada do local associado à rede.",
         accuracy_radius: "O raio em quilômetros ao redor do local especificado onde o endereço IP provavelmente estará.",
-    ]
+        network_start_ip: "Primeiro endereço IP da rede.",
+        network_last_ip: "Último endereço IP válido da rede.",
+    }
 }
 
 WITH ip_data AS (
