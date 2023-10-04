@@ -25,7 +25,7 @@ WITH ip_data AS (
     CAST(SPLIT(network, '/')[OFFSET(1)] AS INT64) AS prefix_length
   FROM
     ${ref('city_blocks_ipv4')}
-), first_last_ip (
+), first_last_ip AS (
     SELECT
     network,
     NET.IP_TO_STRING(NET.IP_FROM_STRING(ip_part)) AS network_start_ip,
