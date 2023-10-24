@@ -14,16 +14,13 @@ fields = [
 
 tables.map((table) => {
     fields.map((field) => {
-        assert(`precision_${table}_${field.name}`)
-            .query((ctx) => {
-                `
-                SELECT
-                    COUNT(${field.name}) AS LimiteLatitude
-                FROM
-                    ${ctx.ref(table)}
-                WHERE
-                    ${field.name} >= ${field.minValue} AND ${field.name} <= ${field.maxValue};
-                `
-            })
+        assert(`precision_${table}_${field.name}`).query((ctx) => `
+            SELECT
+                ${field.name} AS limite_${field.name}
+            FROM
+                ${ctx.ref(table)}
+            WHERE
+                ${field.name} <= ${field.minValue} AND ${field.name} >= ${field.maxValue}
+        `)
     })
 });
