@@ -9,7 +9,7 @@ FROM (
   SELECT
     network,
     COUNT(1) AS index_row_count
-  FROM ${ref("city_blocks_ipv4")}
+  FROM ${ref("city_blocks_ipv6")}
   GROUP BY network
   ) AS data
 WHERE index_row_count > 1
