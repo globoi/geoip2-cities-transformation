@@ -1,0 +1,31 @@
+config {
+    type: "assertion",
+    name: "uniqueness_ipv6"
+}
+
+WITH
+  total_geral AS (
+  SELECT
+    COUNT(geoname_id) AS total
+  FROM
+    ${ref("city_blocks_ipv6")}),
+  total_geoname_id AS (
+  SELECT
+    geoname_id,
+    COUNT(geoname_id) AS qtde_ids
+  FROM
+    ${ref("city_blocks_ipv6")}
+  GROUP BY
+    geoname_id),
+porcentagens AS (
+  SELECT
+  total_geoname_id.geoname_id,
+  total_geoname_id.qtde_ids,
+  total_geral.total,
+  ROUND((total_geoname_id.qtde_ids/total_geral.total)*100, 2) AS porcentagem
+FROM
+  total_geral,
+  total_geoname_id)
+SELECT *
+FROM porcentagens
+WHERE porcentagem > 5
