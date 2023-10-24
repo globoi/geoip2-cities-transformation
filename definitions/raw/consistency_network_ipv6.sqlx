@@ -1,6 +1,6 @@
 config {
     type: "assertion",
-    name: "unique_network"
+    name: "unique_network_ipv6"
 }
 
 SELECT

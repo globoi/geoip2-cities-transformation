@@ -5,7 +5,7 @@ config {
     assertions: {
         uniqueKey: ["network"]
     },
-    dependencies: ["completness_ipv4_raw", "completness_locations_raw", "unique_network"],
+    dependencies: ["completness_ipv4_raw", "completness_locations_raw", "unique_network_ipv4"],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
         continent_code: "O código do continente para esta localidade.",
