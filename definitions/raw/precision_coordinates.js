@@ -14,7 +14,7 @@ fields = [
 
 tables.map((table) => {
     fields.map((field) => {
-        assert(`precision_${table.name}`)
+        assert(`precision_${table}_${field.name}`)
             .query((ctx) => {
                 `
                 SELECT
