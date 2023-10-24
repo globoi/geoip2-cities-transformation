@@ -1,0 +1,17 @@
+config {
+    type: "assertion",
+    name: "completness_locations_raw"
+}
+
+WITH
+total AS (SELECT
+    ROUND((COUNTIF(longitude IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_subdivision_1_name,
+    ROUND((COUNTIF(accuracy_radius IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_subdivision_2_name
+FROM
+    ${ref("city_locations")})
+
+SELECT *
+FROM total
+WHERE
+porcentagem_subdivision_1_name >= 3
+OR porcentagem_subdivision_2_name >= 75
