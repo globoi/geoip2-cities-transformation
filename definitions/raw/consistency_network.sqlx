@@ -1,0 +1,15 @@
+config {
+    type: "assertion",
+    name: "unique_network"
+}
+
+SELECT
+  *
+FROM (
+  SELECT
+    network,
+    COUNT(1) AS index_row_count
+  FROM `gglobo-geoip-hdg-dev.legacy.city_blocks_ipv4_legacy`
+  GROUP BY network
+  ) AS data
+WHERE index_row_count > 1

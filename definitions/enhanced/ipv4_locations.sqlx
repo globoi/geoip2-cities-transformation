@@ -2,7 +2,10 @@ config {
     type: "table",
     name: "ipv4_locations",
     schema: "enhanced",
-    dependencies: ["completness_ipv4_raw", "completness_locations_raw"],
+    assertions: {
+        uniqueKey: ["network"]
+    },
+    dependencies: ["completness_ipv4_raw", "completness_locations_raw", "unique_network"],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
         continent_code: "O código do continente para esta localidade.",

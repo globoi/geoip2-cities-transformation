@@ -2,7 +2,10 @@ config {
     name: "city_blocks_ipv4_legacy",
     type: "table",
     schema: "legacy",
-    dependencies: ["completness_ipv4_raw", "completness_locations_raw"],
+    assertions: {
+        uniqueKey: ["network"]
+    },
+    dependencies: ["completness_ipv4_raw", "completness_locations_raw", "unique_network"],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
         geoname_id: "Um identificador exclusivo para a localização da rede conforme especificado por GeoNames.",
