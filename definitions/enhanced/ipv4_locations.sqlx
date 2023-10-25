@@ -2,7 +2,7 @@ config {
     type: "table",
     name: "ipv4_locations",
     schema: "enhanced",
-    tags: ['enhanced']
+    tags: ['enhanced'],
     assertions: {
         uniqueKey: ["network"]
     },
