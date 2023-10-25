@@ -28,14 +28,14 @@ config {
 }
 
 SELECT
-  network,
-  continent_code,
-  continent_name,
-  country_iso_code,
-  country_name,
-  city_name,
-  subdivision_1_name,
-  subdivision_2_name
+  a.network,
+  b.continent_code,
+  b.continent_name,
+  b.country_iso_code,
+  b.country_name,
+  b.city_name,
+  b.subdivision_1_name,
+  b.subdivision_2_name
 
 FROM
   ${ref('city_blocks_ipv4')} as a
