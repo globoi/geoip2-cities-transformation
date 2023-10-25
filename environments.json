@@ -22,19 +22,5 @@
       },
       "gitRef": "dev"
     }
-  ],
-  "schedules": [
-    {
-      "name": "mainPipelinePrd",
-      "cron": "30 3 * * *",
-      "tags": ["daily"],
-      "disable": "true"
-    },
-    {
-      "name": "devDailySchedule",
-      "cron": "0 2 * * *",
-      "tags": ["daily"],
-      "disabled": false
-    }
   ]
 }

@@ -2,6 +2,7 @@ config {
     name: "city_blocks_ipv4_legacy",
     type: "table",
     schema: "legacy",
+    tags: ['legacy'],
     assertions: {
         uniqueKey: ["network"]
     },
