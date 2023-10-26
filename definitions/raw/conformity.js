@@ -10,7 +10,7 @@ rules = [
 
 rules.map((rule) => assert(`conformity_${rule.table_name}`).query((ctx) => `
     SELECT
-        NOT REGEXP_CONTAINS(network, ${rule.regex})
+        NOT REGEXP_CONTAINS(network, ${rule.regex}) AS invalid_network_format
     FROM
         ${ctx.ref("raw", rule.table_name)}
 `))
