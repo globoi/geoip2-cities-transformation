@@ -1,14 +1,13 @@
 config {
     name: "city_blocks_ipv4_legacy",
     type: "table",
-    schema: "legacy",
-    tags: ['legacy'],
+    schema: "staging",
+    tags: ['staging'],
     assertions: {
         uniqueKey: ["network"]
     },
     dependencies: [
         "completness_ipv4_raw",
-        "completness_locations_raw",
         "conformity_city_blocks_ipv4",
         "unique_network_ipv4",
         "precision_city_blocks_ipv4_latitude",
