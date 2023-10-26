@@ -1,5 +1,5 @@
 config {
-    name: "city_blocks_ipv4_legacy",
+    name: "city_blocks_ipv4",
     type: "table",
     schema: "staging",
     tags: ['staging'],
