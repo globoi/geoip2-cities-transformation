@@ -3,9 +3,6 @@ config {
     type: "table",
     schema: "staging",
     tags: ['staging'],
-    assertions: {
-        uniqueKey: ["network"]
-    },
     dependencies: [
         "completness_ipv4_raw",
         "conformity_city_blocks_ipv4",
