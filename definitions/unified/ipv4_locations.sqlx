@@ -1,8 +1,8 @@
 config {
     type: "table",
     name: "ipv4_locations",
-    schema: "enhanced",
-    tags: ['enhanced'],
+    schema: "unified",
+    tags: ['unified'],
     assertions: {
         uniqueKey: ["network"]
     },
