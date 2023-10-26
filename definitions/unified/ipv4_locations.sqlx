@@ -34,7 +34,7 @@ SELECT
   b.subdivision_2_name
 
 FROM
-  ${ref('ipv4')} as a
+  ${ref('staging', 'city_blocks_ipv4')} as a
 LEFT JOIN
   ${ref('city_locations')} as b
 ON

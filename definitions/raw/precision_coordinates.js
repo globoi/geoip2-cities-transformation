@@ -18,7 +18,7 @@ tables.map((table) => {
             SELECT
                 ${field.name} AS limite_${field.name}
             FROM
-                ${ctx.ref(table)}
+                ${ctx.ref("raw", table)}
             WHERE
                 ${field.name} <= ${field.minValue} AND ${field.name} >= ${field.maxValue}
         `)

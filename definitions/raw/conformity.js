@@ -12,5 +12,5 @@ rules.map((rule) => assert(`conformity_${rule.table_name}`).query((ctx) => `
     SELECT
         NOT REGEXP_CONTAINS(network, ${rule.regex})
     FROM
-        ${ctx.ref(rule.table_name)}
+        ${ctx.ref("raw", rule.table_name)}
 `))

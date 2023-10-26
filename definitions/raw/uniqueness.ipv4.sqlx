@@ -8,13 +8,13 @@ WITH
   SELECT
     COUNT(geoname_id) AS total
   FROM
-    ${ref("city_blocks_ipv4")}),
+    ${ref("raw", "city_blocks_ipv4")}),
   total_geoname_id AS (
   SELECT
     geoname_id,
     COUNT(geoname_id) AS qtde_ids
   FROM
-    ${ref("city_blocks_ipv4")}
+    ${ref("raw", "city_blocks_ipv4")}
   GROUP BY
     geoname_id),
 porcentagens AS (

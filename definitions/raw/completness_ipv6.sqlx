@@ -15,7 +15,7 @@ total AS (SELECT
     ROUND((COUNTIF(accuracy_radius IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_accuracy_radius,
 
 FROM
-    ${ref("city_blocks_ipv6")})
+    ${ref('raw', 'city_blocks_ipv6')})
 
 SELECT *
 FROM total

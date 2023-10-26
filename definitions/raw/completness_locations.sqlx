@@ -8,7 +8,7 @@ total AS (SELECT
     ROUND((COUNTIF(longitude IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_subdivision_1_name,
     ROUND((COUNTIF(accuracy_radius IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_subdivision_2_name
 FROM
-    ${ref("city_locations")})
+    ${ref("raw", "city_locations")})
 
 SELECT *
 FROM total

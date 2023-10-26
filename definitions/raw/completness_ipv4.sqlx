@@ -16,7 +16,7 @@ total AS (SELECT
 
 
 FROM
-    ${ref('city_blocks_ipv4')})
+    ${ref('raw', 'city_blocks_ipv4')})
 
 SELECT *
 FROM total
