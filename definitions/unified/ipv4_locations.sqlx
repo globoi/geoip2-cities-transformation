@@ -21,6 +21,13 @@ config {
     }
 }
 
+post_operations {
+    ALTER TABLE ${self()}
+    SET OPTIONS (
+        expiration_timestamp = TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 90 DAY)
+    );
+}
+
 SELECT
   a.network,
   a.network_start_ip,
