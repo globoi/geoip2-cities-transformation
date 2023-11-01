@@ -2,7 +2,7 @@ config {
     name: "city_blocks_ipv4",
     type: "table",
     schema: "staging",
-    tags: ['staging'],
+    tags: ["staging"],
     dependencies: [
         "completness_ipv4_raw",
         "conformity_city_blocks_ipv4",
@@ -11,6 +11,7 @@ config {
         "precision_city_blocks_ipv4_longitude",
         "uniqueness_ipv4"
     ],
+    description: "Mapeia blocos e geolocalização por geoname_id, acrecentando primeiro e último IP da rede",
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
         geoname_id: "Um identificador exclusivo para a localização da rede conforme especificado por GeoNames.",

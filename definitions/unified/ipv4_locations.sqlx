@@ -2,10 +2,11 @@ config {
     type: "table",
     name: "ipv4_locations",
     schema: "unified",
-    tags: ['unified'],
+    tags: ["unified"],
     assertions: {
         uniqueKey: ["network"]
     },
+    descriptions: "Dados de geolocalização e rede unificados",
     dependencies: ["completness_locations_raw"],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
