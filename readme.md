@@ -1,6 +1,6 @@
 # Transformações GeoIP2 BigQuery
 
-Esta repositório cobre as transformações aplicadas aos dados de GeoIP2 da MaxMind. Para entender como funciona a Extração e Carga desses dados no BigQuery, consulta o [repositório no Gitlab](https://gitlab.globoi.com/bigdata/datalake/geoip2-cities)
+Este repositório cobre as transformações aplicadas aos dados de GeoIP2 da MaxMind. Para entender como funciona a Extração e Carga desses dados no BigQuery, consulta o [repositório no Gitlab](https://gitlab.globoi.com/bigdata/datalake/geoip2-cities)
 
 ## Introdução
 
