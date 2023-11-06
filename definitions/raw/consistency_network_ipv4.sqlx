@@ -1,0 +1,15 @@
+config {
+    type: "assertion",
+    name: "unique_network_ipv4"
+}
+
+SELECT
+  *
+FROM (
+  SELECT
+    network,
+    COUNT(1) AS index_row_count
+  FROM ${ref("raw", "city_blocks_ipv4")}
+  GROUP BY network
+  ) AS data
+WHERE index_row_count > 1

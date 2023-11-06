@@ -1,0 +1,49 @@
+config {
+    type: "table",
+    name: "ipv4_locations",
+    schema: "unified",
+    tags: ["unified"],
+    assertions: {
+        uniqueKey: ["network"]
+    },
+    description: "Dados de geolocalização e rede unificados",
+    dependencies: ["completness_locations_raw"],
+    columns: {
+        network: "Esta é a rede IPv4 no formato CIDR.",
+        network_start_ip: "Primeiro endereço IP da rede.",
+        network_last_ip: "Último endereço IP válido da rede.",
+        continent_code: "O código do continente para esta localidade.",
+        continent_name: "O nome do continente para esta localidade.",
+        country_iso_code: "Um código de país ISO 3166-1 de dois caracteres para o país associado ao local.",
+        country_name: "O nome do país para este local.",
+        city_name: "O nome da cidade para esta localidade.",
+        subdivision_1_name: "O nome da subdivisão deste local. Tal como acontece com o código de subdivisão, esta é a subdivisão menos específica para o local.",
+        subdivision_2_name: "O nome da subdivisão deste local. Tal como acontece com o código de subdivisão, esta é a subdivisão mais específica para o local.",
+    }
+}
+
+post_operations {
+    ALTER TABLE ${self()}
+    SET OPTIONS (
+        expiration_timestamp = TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 90 DAY)
+    );
+}
+
+SELECT
+  a.network,
+  a.network_start_ip,
+  a.network_last_ip,
+  b.continent_code,
+  b.continent_name,
+  b.country_iso_code,
+  b.country_name,
+  b.city_name,
+  b.subdivision_1_name,
+  b.subdivision_2_name
+
+FROM
+  ${ref('staging', 'city_blocks_ipv4')} as a
+LEFT JOIN
+  ${ref('city_locations')} as b
+ON
+  a.geoname_id = b.geoname_id
