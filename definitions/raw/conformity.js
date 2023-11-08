@@ -29,6 +29,6 @@ rules.map((rule) => assert(`conformity_${rule.table_name}`).query((ctx) => `
         NOT REGEXP_CONTAINS(network, ${rule.regex})
 `).config(
   {
-    description: 'confere se o valor do campo network possui o formato esperado',
+    description: 'Confere se o valor do campo network possui o formato esperado',
   },
 ))
