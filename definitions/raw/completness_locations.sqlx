@@ -1,6 +1,7 @@
 config {
     type: "assertion",
-    name: "completness_locations_raw"
+    name: "completness_locations_raw",
+    description: "Confere a completude de diversos campos da tabela city_locations"
 }
 
 WITH

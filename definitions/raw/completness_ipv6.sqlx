@@ -1,6 +1,7 @@
 config {
     type: "assertion",
-    name: "completness_ipv6_raw"
+    name: "completness_ipv6_raw",
+    description: "Confere a completude de diversos campos da tabela city_blocks_ipv6"
 }
 
 WITH
