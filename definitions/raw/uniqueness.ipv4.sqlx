@@ -1,6 +1,7 @@
 config {
     type: "assertion",
-    name: "uniqueness_ipv4"
+    name: "uniqueness_ipv4",
+    description: "Verifica se não existem linhas duplicadas através do geonamed_id",
 }
 
 WITH

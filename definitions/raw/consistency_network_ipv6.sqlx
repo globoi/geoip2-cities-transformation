@@ -1,6 +1,7 @@
 config {
     type: "assertion",
-    name: "unique_network_ipv6"
+    name: "unique_network_ipv6",
+    description: "Verifica se não existem networks duplicadas",
 }
 
 SELECT

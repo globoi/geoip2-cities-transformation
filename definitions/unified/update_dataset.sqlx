@@ -1,0 +1,16 @@
+-- Preferiu-se criar o dataset manualmente para ser possível setar um tempo de expiração para as tabelas da camada staging
+config {
+  tags: ['unified'],
+  dependencies: [{schema: 'unified', name: 'ipv4_locations'}],
+  name: "update unified dataset"
+}
+
+ALTER SCHEMA unified
+ SET OPTIONS (
+     description = 'Dataset que contém as tabelas finais, unindo as informações raw',
+     default_table_expiration_days = 30,
+      labels = [
+      ('createdby', 'dataform'),
+      ('team', 'dataproducts')
+    ]
+);

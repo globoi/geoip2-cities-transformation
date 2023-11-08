@@ -1,14 +1,14 @@
 {
   "scripts": {
-      "lint": "./node_modules/.bin/eslint .",
-      "lint:fix": "./node_modules/.bin/eslint . --fix"
+    "lint": "./node_modules/.bin/eslint .",
+    "lint:fix": "./node_modules/.bin/eslint . --fix"
   },
   "dependencies": {
-    "@dataform/core": "2.4.2"
+    "@dataform/core": "^2.7.0"
   },
   "devDependencies": {
-      "eslint": "^8.38.0",
-      "eslint-config-airbnb-base": "^15.0.0",
-      "eslint-plugin-import": "^2.27.5"
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
   }
 }
