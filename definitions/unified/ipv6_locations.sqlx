@@ -1,6 +1,6 @@
 config {
     type: "table",
-    name: "ipv4_locations",
+    name: "ipv6_locations",
     schema: "unified",
     tags: ["unified"],
     assertions: {
