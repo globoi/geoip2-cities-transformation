@@ -23,6 +23,11 @@ config {
         subdivision_1_name: "O nome da subdivisão deste local. Tal como acontece com o código de subdivisão, esta é a subdivisão menos específica para o local.",
         subdivision_2_name: "O nome da subdivisão deste local. Tal como acontece com o código de subdivisão, esta é a subdivisão mais específica para o local.",
         last_modified_date: "Data da última atualização dos dados.",
+    },
+    bigquery: {
+      partitionBy: 'last_modified_date',
+      requirePartitionFilter : true,
+      partitionExpirationDays: 90,
     }
 }
 
