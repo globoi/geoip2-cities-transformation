@@ -42,9 +42,9 @@ SELECT
   a.network,
   a.network_start_ip,
   a.network_last_ip,
-  a.network_start_ip_decimal
-  a.network_last_ip_decimal
-  a.network_size
+  a.network_start_ip_decimal,
+  a.network_last_ip_decimal,
+  a.network_size,
   b.continent_code,
   b.continent_name,
   b.country_iso_code,
