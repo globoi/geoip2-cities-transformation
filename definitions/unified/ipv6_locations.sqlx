@@ -9,7 +9,7 @@ config {
     description: "Dados de geolocalização e rede unificados",
     dependencies: ["completness_locations_raw"],
     columns: {
-        network: "Esta é a rede IPv4 no formato CIDR.",
+        network: "Esta é a rede IPv6 no formato CIDR.",
         network_start_ip: "Primeiro endereço IP da rede.",
         network_last_ip: "Último endereço IP válido da rede.",
         network_start_ip_decimal: "Primeiro endereço IP da rede em decimal",
@@ -50,7 +50,7 @@ SELECT
   a.last_modified_date
 
 FROM
-  ${ref('city_blocks_ipv4')} as a
+  ${ref('city_blocks_ipv6')} as a
 LEFT JOIN
   ${ref('city_locations')} as b
 ON
