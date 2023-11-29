@@ -9,8 +9,10 @@ total AS (SELECT
     ROUND((COUNTIF(subdivision_1_name IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_subdivision_1_name,
     ROUND((COUNTIF(subdivision_2_name IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_subdivision_2_name
 FROM
-    ${ref("raw", "city_locations")})
+    ${ref("raw", "city_locations")}
 
+WHERE last_modified_date = ${dataform.projectConfig.vars.lastModifiedDate}
+)
 SELECT *
 FROM total
 WHERE
