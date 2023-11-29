@@ -18,6 +18,7 @@ config {
     ],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
+        octet_1: "Primeiro octeto do da bloco CIDR que define a rede.",
         network_start_ip: "Primeiro endereço IP da rede.",
         network_last_ip: "Último endereço IP válido da rede.",
         network_start_ip_decimal: "Primeiro endereço IP da rede em decimal",
@@ -36,6 +37,7 @@ config {
       partitionBy: 'last_modified_date',
       requirePartitionFilter : true,
       partitionExpirationDays: 90,
+      clusterBy: ['octet_1']
     }
 }
 
@@ -48,6 +50,7 @@ post_operations {
 
 SELECT
   a.network,
+  split(a.network, '.')[offset(0)] as octet_1
   a.network_start_ip,
   a.network_last_ip,
   a.network_start_ip_decimal,
