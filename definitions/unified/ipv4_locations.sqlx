@@ -7,7 +7,15 @@ config {
         uniqueKey: ["network"]
     },
     description: "Dados de geolocalização e rede unificados",
-    dependencies: ["completness_locations_raw"],
+    dependencies: [
+      "completness_locations_raw",
+      "completness_ipv4_raw",
+      "conformity_city_blocks_ipv4",
+      "unique_network_ipv4",
+      "precision_city_blocks_ipv4_latitude",
+      "precision_city_blocks_ipv4_longitude",
+      "uniqueness_ipv4",
+    ],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
         network_start_ip: "Primeiro endereço IP da rede.",
