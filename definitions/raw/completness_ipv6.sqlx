@@ -18,7 +18,7 @@ total AS (SELECT
 FROM
     ${ref('raw', 'city_blocks_ipv6')}
 
-WHERE last_modified_date = ${dataform.projectConfig.vars.lastModifiedDate}
+WHERE last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
 )
 SELECT *
 FROM total

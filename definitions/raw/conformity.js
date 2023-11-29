@@ -27,7 +27,7 @@ rules.map((rule) => assert(`conformity_${rule.table_name}`).query((ctx) => `
         ${ctx.ref('raw', rule.table_name)}
     WHERE
         NOT REGEXP_CONTAINS(network, ${rule.regex}) AND
-        last_modified_date = ${dataform.projectConfig.vars.lastModifiedDate}
+        last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
 `).config(
   {
     description: 'Confere se o valor do campo network possui o formato esperado',
