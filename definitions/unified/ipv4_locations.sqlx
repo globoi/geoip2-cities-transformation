@@ -50,7 +50,7 @@ post_operations {
 
 SELECT
   a.network,
-  split(a.network, '.')[offset(0)] as octet_1
+  split(a.network, '.')[offset(0)] as octet_1,
   a.network_start_ip,
   a.network_last_ip,
   a.network_start_ip_decimal,
