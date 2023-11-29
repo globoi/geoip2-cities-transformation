@@ -70,3 +70,4 @@ ON
   a.geoname_id = b.geoname_id
 
 WHERE a.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
+  b.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
