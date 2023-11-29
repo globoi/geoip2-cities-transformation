@@ -22,7 +22,7 @@ tables.map((table) => {
         WHERE
             ${field.name} <= ${field.minValue} AND
             ${field.name} >= ${field.maxValue} AND
-            last_modified_date = ${ctx.dataform.projectConfig.vars.lastModifiedDate}
+            last_modified_date = ${dataform.projectConfig.vars.lastModifiedDate}
     `).config({
       description: 'Verifica se latitude e langitude tem valores dentro do limite esperado',
     })
