@@ -32,4 +32,4 @@ FROM
   total_geoname_id)
 SELECT *
 FROM porcentagens
-WHERE porcentagem > 5
+WHERE porcentagem > 15
