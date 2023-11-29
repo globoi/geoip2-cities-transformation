@@ -4,7 +4,7 @@ config {
     schema: "unified",
     tags: ["unified"],
     assertions: {
-        uniqueKey: ["network"]
+        uniqueKey: ["last_modified_date", "network"]
     },
     description: "Dados de geolocalização e rede unificados",
     dependencies: [
