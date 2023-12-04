@@ -18,12 +18,8 @@ config {
     ],
     columns: {
         network: "Esta é a rede IPv4 no formato CIDR.",
-        octet_1: "Primeiro octeto do da bloco CIDR que define a rede.",
-        network_start_ip: "Primeiro endereço IP da rede.",
-        network_last_ip: "Último endereço IP válido da rede.",
-        network_start_ip_decimal: "Primeiro endereço IP da rede em decimal",
-        network_last_ip_decimal: "Último endereço IP da rede em decimal",
-        network_size: "Número de endereços que a rede contém.",
+        network_bin: "Primeiro endereço IP da rede em binário.",
+        mask: "Máscara da rede.",
         continent_code: "O código do continente para esta localidade.",
         continent_name: "O nome do continente para esta localidade.",
         country_iso_code: "Um código de país ISO 3166-1 de dois caracteres para o país associado ao local.",
@@ -50,12 +46,8 @@ post_operations {
 
 SELECT
   a.network,
-  split(a.network, '.')[offset(0)] as octet_1,
-  a.network_start_ip,
-  a.network_last_ip,
-  a.network_start_ip_decimal,
-  a.network_last_ip_decimal,
-  a.network_size,
+  NET.IP_FROM_STRING(SPLIT(a.network, '/')[OFFSET(0)]) AS network_bin,
+  CAST(SPLIT(a.network, '/')[OFFSET(1)] AS INT64) AS mask,
   b.continent_code,
   b.continent_name,
   b.country_iso_code,
@@ -63,7 +55,7 @@ SELECT
   b.city_name,
   b.subdivision_1_name,
   b.subdivision_2_name,
-  a.last_modified_date
+  b.last_modified_date
 
 FROM
   ${ref('city_blocks_ipv4')} as a
