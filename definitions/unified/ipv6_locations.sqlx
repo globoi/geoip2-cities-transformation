@@ -3,9 +3,7 @@ config {
     name: "ipv6_locations",
     schema: "unified",
     tags: ["unified"],
-    assertions: {
-        uniqueKey: ["last_modified_date", "network"]
-    },
+    uniqueKey: ["network"],
     description: "Dados de geolocalização e rede unificados",
     dependencies: [
       "completness_locations_raw",
@@ -33,6 +31,7 @@ config {
       partitionBy: 'last_modified_date',
       requirePartitionFilter : true,
       partitionExpirationDays: 90,
+      updatePartitionFilter: "last_modified_date >= date_sub(CURRENT_DATE(), INTERVAL 4 DAY)",
     }
 }
 
@@ -63,5 +62,8 @@ LEFT JOIN
 ON
   a.geoname_id = b.geoname_id
 
-WHERE a.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}" AND
-  b.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
+${
+  when(incremental(),
+  `WHERE a.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}) and
+    b.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}`)
+}
