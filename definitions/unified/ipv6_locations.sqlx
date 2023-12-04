@@ -65,5 +65,8 @@ ON
 ${
   when(incremental(),
   `WHERE a.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}) and
-    b.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}`)
+    b.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}`,
+  `WHERE a.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}" AND
+    b.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"`
+  )
 }
