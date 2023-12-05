@@ -62,13 +62,5 @@ LEFT JOIN
 ON
   a.geoname_id = b.geoname_id
 
-${
-  when(incremental(),
-  `WHERE a.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}) AND
-    b.last_modified_date > (SELECT MAX(last_modified_date) FROM ${self()}) AND
-    a.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}" AND
-    b.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"`,
-  `WHERE a.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}" AND
-    b.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"`
-  )
-}
+WHERE a.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}" AND
+    b.last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
