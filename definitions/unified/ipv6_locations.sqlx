@@ -31,7 +31,7 @@ config {
       partitionBy: 'last_modified_date',
       requirePartitionFilter : true,
       partitionExpirationDays: 90,
-      updatePartitionFilter: "last_modified_date = date_sub(CURRENT_DATE(), INTERVAL 3 DAY)",
+      updatePartitionFilter: `last_modified_date = ${dataform.projectConfig.vars.lastModifiedDate}`,
     }
 }
 
