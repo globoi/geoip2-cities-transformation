@@ -11,12 +11,11 @@ Este pipeline é completamente desenvolvido no ambiente da ferramenta Dataform (
 #### Descricão das Camadas
 
 - **Camada raw**: possui os dados extraidos da Maxmind sem nenhum tipo de tratamento;
-- **Camada staging**: possui as tabelas city_blocks_ipv[4|6] com duas novas colunas que representam o IP inicial e o IP final de uma rede (campo network). Por exemplo, para uma rede ``10.0.0.0/24``, o IP inicial será ``	10.0.0.0`` e o IP final será ``	10.0.0.255``, dados que a máscara de sub-rede ``24`` engloba 256 endereços;
-- **Camada unified**: Une as tabelas staging com a tabela city_locations. Ou seja, agrega a informação de IP com a informação de geolocalização.
+
+- **Camada unified**: Une as tabelas city_blocks com a tabela city_locations. Ou seja, agrega a informação de IP com a informação de geolocalização. Cria os campos ```network_bin``` e ```mask``` para simplificar as consultas.
 
 ![tabelas](docs/img/tabelas.png)
 
-> Nota: Ainda não temos a camada unified para a versão IPv6. Pois o Bigquery não possui funções nativas que permitem encontrar IP inicial e final. Estamos trabalhando no desenvolvimento de uma UDF para entregar esta tabela.
 
 ## Estrutura do Projeto
 ```
