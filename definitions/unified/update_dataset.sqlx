@@ -8,7 +8,7 @@ config {
 ALTER SCHEMA unified
  SET OPTIONS (
      description = 'Dataset que contém as tabelas finais, unindo as informações raw',
-     default_table_expiration_days = 30,
+     default_table_expiration_days = 90,
       labels = [
       ('createdby', 'dataform'),
       ('team', 'dataproducts')

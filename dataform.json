@@ -5,6 +5,6 @@
   "defaultDatabase": "gglobo-geoip-hdg-dev",
   "defaultLocation": "US",
   "vars": {
-    "env": "dev"
+    "lastModifiedDate": "DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)"
   }
 }

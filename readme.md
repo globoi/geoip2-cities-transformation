@@ -1,29 +1,27 @@
 # Transformações GeoIP2 BigQuery
 
-Este repositório cobre as transformações aplicadas aos dados de GeoIP2 da MaxMind. Para entender como funciona a Extração e Carga desses dados no BigQuery, consulta o [repositório no Gitlab](https://gitlab.globoi.com/bigdata/datalake/geoip2-cities)
+Este repositório cobre as transformações aplicadas aos dados de GeoIP2 da MaxMind. Para entender como funciona a Extração e Carga desses dados no BigQuery, consulte o [repositório no Gitlab](https://gitlab.globoi.com/bigdata/datalake/geoip2-cities).
 
 ## Introdução
 
-Este pipeline é completamente desenvolvido no ambiente da ferramenta Dataform (BigQuery para BigQuery). Portanto, as camdas de staging e unified são criadas através do Dataform. A camada raw é criada pelo pipeline de Extração e Carga.
+Este pipeline é completamente desenvolvido no ambiente da ferramenta Dataform (BigQuery para BigQuery). Portanto, as camadas de staging e unified são criadas através do Dataform. A camada raw é criada pelo pipeline de Extração e Carga.
 
 ![pipeline-layers](docs/img/camadas.png)
 
 #### Descricão das Camadas
 
 - **Camada raw**: possui os dados extraidos da Maxmind sem nenhum tipo de tratamento;
-- **Camada staging**: possui as tabelas city_blocks_ipv[4|6] com duas novas colunas que representam o IP inicial e o IP final de uma rede (campo network). Por exemplo, para uma rede ``10.0.0.0/24``, o IP inicial será ``	10.0.0.0`` e o IP final será ``	10.0.0.255``, dados que a máscara de sub-rede ``24`` engloba 256 endereços;
-- **Camda unified**: Une as tabelas staging com a tabela city_locations. Ou seja, agrega a informação de IP com a informação de geolocalização.
+
+- **Camada unified**: Une as tabelas city_blocks com a tabela city_locations. Ou seja, agrega a informação de IP com a informação de geolocalização. Cria os campos ```network_bin``` e ```mask``` para simplificar as consultas.
 
 ![tabelas](docs/img/tabelas.png)
 
-> Nota: Ainda não temos a camada unified para a versão IPv6. Pois o Bigquery não possui funções nativas que permitem encontrar IP inicial e final. Estamos trabalhando no desenvolvimento de uma UDF para entregar esta tabela.
 
 ## Estrutura do Projeto
 ```
 ├── dataform.json
 ├── definitions
 │   ├── raw/
-│   ├── staging/
 │   └── unified/
 ├── docs
 ├── environments.json

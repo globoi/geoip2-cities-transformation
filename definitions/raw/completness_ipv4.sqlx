@@ -5,28 +5,30 @@ config {
 }
 
 WITH
-total AS (SELECT
-    ROUND((COUNTIF(network IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_network,
-    ROUND((COUNTIF(geoname_id IS NULL) / COUNT(1)) * 100.0, 2)  as porcentagem_nulos_geoname_id,
-    ROUND((COUNTIF(registered_country_geoname_id IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_registered_country_geoname_id,
-    ROUND((COUNTIF(is_anonymous_proxy IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_is_anonymous_proxy,
-    ROUND((COUNTIF(postal_code IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_postal_code,
-    ROUND((COUNTIF(latitude IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_latitude,
-    ROUND((COUNTIF(longitude IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_longitude,
-    ROUND((COUNTIF(accuracy_radius IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_accuracy_radius,
+total AS (
+    SELECT
+        ROUND((COUNTIF(network IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_network,
+        ROUND((COUNTIF(geoname_id IS NULL) / COUNT(1)) * 100.0, 2)  as porcentagem_nulos_geoname_id,
+        ROUND((COUNTIF(registered_country_geoname_id IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_registered_country_geoname_id,
+        ROUND((COUNTIF(is_anonymous_proxy IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_is_anonymous_proxy,
+        ROUND((COUNTIF(postal_code IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_postal_code,
+        ROUND((COUNTIF(latitude IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_latitude,
+        ROUND((COUNTIF(longitude IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_nulos_longitude,
+        ROUND((COUNTIF(accuracy_radius IS NULL) / COUNT(1)) * 100.0, 2) as porcentagem_accuracy_radius,
 
+    FROM
+        ${ref('raw', 'city_blocks_ipv4')}
 
-FROM
-    ${ref('raw', 'city_blocks_ipv4')})
-
+    WHERE last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
+)
 SELECT *
 FROM total
 WHERE
-porcentagem_nulos_network >= 2
-OR porcentagem_nulos_geoname_id >= 2
-OR porcentagem_nulos_registered_country_geoname_id >= 3
-OR porcentagem_nulos_is_anonymous_proxy >= 2
-OR porcentagem_nulos_postal_code >= 14
-OR porcentagem_nulos_latitude >= 2
-OR porcentagem_nulos_longitude >= 2
-OR porcentagem_accuracy_radius >= 2
+    porcentagem_nulos_network >= 2
+    OR porcentagem_nulos_geoname_id >= 2
+    OR porcentagem_nulos_registered_country_geoname_id >= 3
+    OR porcentagem_nulos_is_anonymous_proxy >= 2
+    OR porcentagem_nulos_postal_code >= 14
+    OR porcentagem_nulos_latitude >= 2
+    OR porcentagem_nulos_longitude >= 2
+    OR porcentagem_accuracy_radius >= 2

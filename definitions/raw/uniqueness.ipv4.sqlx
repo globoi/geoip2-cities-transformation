@@ -9,13 +9,16 @@ WITH
   SELECT
     COUNT(geoname_id) AS total
   FROM
-    ${ref("raw", "city_blocks_ipv4")}),
+    ${ref("raw", "city_blocks_ipv4")}
+  WHERE last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
+  ),
   total_geoname_id AS (
   SELECT
     geoname_id,
     COUNT(geoname_id) AS qtde_ids
   FROM
     ${ref("raw", "city_blocks_ipv4")}
+  WHERE last_modified_date = "${dataform.projectConfig.vars.lastModifiedDate}"
   GROUP BY
     geoname_id),
 porcentagens AS (
